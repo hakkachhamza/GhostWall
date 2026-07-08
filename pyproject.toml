@@ -1,0 +1,129 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ghostwall"
+version = "2.0.0"
+description = "Enterprise Windows Security Hardening & Security Orchestration Framework"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [
+    { name = "GhostWall Contributors", email = "hakkachhamza0@gmail.com" }
+]
+keywords = [
+    "security", "windows", "hardening", "compliance", "cis", "mitre", "nist",
+    "firewall", "defender", "powershell", "winrm", "orchestration"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Security",
+    "Topic :: System :: Systems Administration",
+    "Typing :: Typed"
+]
+requires-python = ">=3.9"
+dependencies = [
+    "rich>=13.0.0",
+    "pywinrm>=0.4.3",
+    "plyer>=2.1.0",
+]
+
+[project.optional-dependencies]
+windows = [
+    "pywin32>=306",
+    "wmi>=1.5.1"
+]
+encrypt = [
+    "cryptography>=41.0.0"
+]
+pdf = [
+    "fpdf2>=2.7.0",
+    "reportlab>=4.0.0"
+]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "pytest-mock>=3.11.0",
+    "flake8>=6.1.0",
+    "black>=23.7.0",
+    "mypy>=1.5.0",
+    "bandit>=1.7.5",
+    "safety>=2.3.0"
+]
+all = [
+    "pywin32>=306",
+    "wmi>=1.5.1",
+    "cryptography>=41.0.0",
+    "fpdf2>=2.7.0",
+    "reportlab>=4.0.0"
+]
+
+[project.scripts]
+ghostwall = "ghostwall.cli:main"
+gw = "ghostwall.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/hakkachhamza/GhostWall"
+Documentation = "https://github.com/hakkachhamza/GhostWall/blob/main/docs"
+Repository = "https://github.com/hakkachhamza/GhostWall"
+Issues = "https://github.com/hakkachhamza/GhostWall/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["ghostwall*"]
+exclude = ["tests*", "docs*"]
+
+[tool.setuptools.package-data]
+ghostwall = ["py.typed"]
+
+[tool.black]
+line-length = 120
+target-version = ["py39", "py310", "py311", "py312"]
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+    \.git
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-ra --strict-markers --cov=ghostwall --cov-report=term-missing"
+markers = [
+    "windows: tests that require a Windows environment",
+    "admin: tests that require administrator privileges",
+]
+
+[tool.bandit]
+exclude_dirs = ["tests"]
+skips = ["B101", "B311"]
+
+[tool.coverage.run]
+source = ["ghostwall"]
+omit = ["*/tests/*"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = false

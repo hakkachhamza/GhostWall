@@ -1,0 +1,27 @@
+{
+  "enabled_modules": [
+    "Firewall Enforcement",
+    "Remote Desktop Lockdown",
+    "Ransomware Protection",
+    "Defender Real-Time Protection",
+    "UAC Maximization",
+    "DEP Enforcement",
+    "Legacy Protocol Removal",
+    "Privacy Hardening",
+    "Guest Account Lockdown",
+    "Autorun/Autoplay Disable",
+    "PowerShell Script Policy",
+    "Password Policy"
+  ],
+  "module_params": {
+    "Password Policy": {
+      "_min_length": 14,
+      "_max_age": 30,
+      "_lockout": 3
+    }
+  },
+  "scoring": {
+    "good_threshold": 85,
+    "warning_threshold": 60
+  }
+}

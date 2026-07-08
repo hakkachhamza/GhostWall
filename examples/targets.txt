@@ -1,0 +1,7 @@
+# Example target list for remote WinRM orchestration
+# One hostname or IP address per line
+# Lines starting with # are ignored
+
+win-dc-01.corp.example.com
+win-ws-01.corp.example.com
+192.168.1.50

@@ -1,0 +1,30 @@
+{
+  "app_name": "GhostWall",
+  "app_version": "2.0.0",
+  "logging": {
+    "log_dir": "logs",
+    "max_bytes": 5242880,
+    "backup_count": 5
+  },
+  "backup": {
+    "backup_dir": "backups",
+    "encrypt_by_default": false,
+    "key_env_var": "GHOSTWALL_BACKUP_KEY"
+  },
+  "reports": {
+    "report_dir": "reports",
+    "default_format": "html",
+    "supported_formats": ["html", "json", "csv", "pdf"]
+  },
+  "monitor": {
+    "poll_seconds": 60,
+    "state_dir": "%LOCALAPPDATA%/GhostWall"
+  },
+  "remote": {
+    "default_transport": "ntlm",
+    "default_max_workers": 10,
+    "default_use_ssl": true,
+    "port_http": 5985,
+    "port_https": 5986
+  }
+}
